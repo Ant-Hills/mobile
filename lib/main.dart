@@ -2,15 +2,15 @@ import 'package:anthills/ui/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
 
 import 'localization/app_translations_delegate.dart';
 import 'localization/application.dart';
 
-main() {
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(App());
+    runApp(new App());
   });
 }
 
@@ -39,23 +39,23 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: [
-          _newLocaleDelegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: [
-          const Locale('en', ''), // English
-        ],
-        initialRoute: '/',
-        routes: {
-          '/': (context) => MainScreen(),
-        },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        _newLocaleDelegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      theme: ThemeData(
+        primarySwatch: Colors.green,
       ),
+      supportedLocales: [
+        const Locale('en', ''), // English
+      ],
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MainScreen(),
+      },
     );
   }
 }
